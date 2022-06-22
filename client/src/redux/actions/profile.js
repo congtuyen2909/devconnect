@@ -1,6 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 import { GET_PROFILE, PROFILE_ERROR } from './type';
+import { setAlert } from './alert';
 
 //get current user profile
 export const getCurrentProfile = () => async (dispatch) => {
@@ -19,15 +20,34 @@ export const getCurrentProfile = () => async (dispatch) => {
 };
 
 //create and update profile
-export const createProfile = (profile) => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-  dispatch({
-    type: '',
-    payload: profile,
-  });
+export const createProfile =
+  (formData, history, edit = false) =>
+  async (dispatch) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
 
-  try {
-  } catch (err) {}
-};
+    try {
+      const res = await axios.post('/api/profile', formData);
+
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data,
+      });
+
+      dispatch(
+        setAlert(edit ? 'Updated profile' : 'Created profile', 'success')
+      );
+
+      if (!edit) history.push('/dashboard');
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  };
