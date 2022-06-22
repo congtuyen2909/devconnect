@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profile: null,
-        repo: [],
+        repos: [],
         loading: false,
       };
 
