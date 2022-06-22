@@ -30,6 +30,10 @@ ul {
   list-style: none;
 }
 
+input, textarea {
+  outline: none;
+}
+
 img {
   width: 100%;
 }
