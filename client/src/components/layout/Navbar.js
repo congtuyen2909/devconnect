@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/auth';
+import { logout } from '../../redux/actions/auth';
 import PropsType from 'prop-types';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {

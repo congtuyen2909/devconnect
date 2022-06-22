@@ -17,5 +17,4 @@ export const setAlert = (msg, alertType) => (dispatch) => {
       }),
     3000
   );
-
 };
