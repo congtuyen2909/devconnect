@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import { getCurrentProfile } from '../../redux/actions/profile';
 import { Link } from 'react-router-dom';
+import { getCurrentProfile } from '../../redux/actions/profile';
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -25,6 +27,10 @@ const Dashboard = ({
       {profile !== null ? (
         <>
           <DashboardActions />
+          <Experience
+            experience={profile.experience ? profile.experience : []}
+          />
+          <Education education={profile.education ? profile.education : []} />
         </>
       ) : (
         <>

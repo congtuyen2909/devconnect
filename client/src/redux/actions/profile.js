@@ -62,7 +62,7 @@ export const addExperience = (formData, history) => async (dispatch) => {
 
     dispatch({
       type: UPATE_PROFILE,
-      payload: res.data.profile,
+      payload: res.data,
     });
 
     dispatch(setAlert('Experience added', 'success'));
