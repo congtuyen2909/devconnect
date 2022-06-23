@@ -14,9 +14,10 @@ import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
+import AddExperience from './components/profile-forms/AddExperience';
+import AddEducation from './components/profile-forms/AddEducation';
 
 import './App.css';
-import AddExperience from './components/profile-forms/AddExperience';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -52,6 +53,11 @@ const App = () => {
                 exact
                 path='/add-experience'
                 component={AddExperience}
+              />
+              <PrivateRoute
+                exact
+                path='/add-education'
+                component={AddEducation}
               />
             </Switch>
           </section>
