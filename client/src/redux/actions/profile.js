@@ -1,6 +1,6 @@
 import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
-import { GET_PROFILE, PROFILE_ERROR } from './type';
+import { GET_PROFILE, PROFILE_ERROR, UPATE_PROFILE } from './type';
 import { setAlert } from './alert';
 
 //get current user profile
@@ -39,7 +39,7 @@ export const createProfile =
         setAlert(edit ? 'Updated profile' : 'Created profile', 'success')
       );
 
-      if (!edit) history.push('/dashboard');
+      history.push('/dashboard');
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -51,3 +51,32 @@ export const createProfile =
       });
     }
   };
+
+//add experience
+export const addExperience = (formData, history) => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  console.log(formData);
+  try {
+    const res = await axios.put('/api/profile/experience', formData);
+
+    dispatch({
+      type: UPATE_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert('Experience added', 'success'));
+
+    history.push('/dashboard');
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};

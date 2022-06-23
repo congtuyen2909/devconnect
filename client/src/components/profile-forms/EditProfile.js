@@ -51,17 +51,12 @@ const EditProfile = ({
       skills: loading || !profile.skills ? '' : profile.skills.join(', '),
       bio: loading || !profile.bio ? '' : profile.bio,
       githubusername:
-        loading || !profile.social.githubusername
-          ? ''
-          : profile.social.githubusername,
-      youtube: loading || !profile.social.youtube ? '' : profile.social.youtube,
-      facebook:
-        loading || !profile.social.facebook ? '' : profile.social.facebook,
-      twitter: loading || !profile.social.twitter ? '' : profile.social.twitter,
-      linkedin:
-        loading || !profile.social.linkedin ? '' : profile.social.linkedin,
-      instagram:
-        loading || !profile.social.instagram ? '' : profile.social.instagram,
+        loading || !profile.githubusername ? '' : profile.githubusername,
+      youtube: loading || !profile.social ? '' : profile.social.youtube,
+      facebook: loading || !profile.social ? '' : profile.social.facebook,
+      twitter: loading || !profile.social ? '' : profile.social.twitter,
+      linkedin: loading || !profile.social ? '' : profile.social.linkedin,
+      instagram: loading || !profile.social ? '' : profile.social.instagram,
     });
   }, [loading]);
 
